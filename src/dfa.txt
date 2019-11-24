@@ -1,7 +1,14 @@
 Q:
-q0, q1, q2, q3, q4
+q0
+q1
+q2
+q3
+q4
+end
 Sigma:
-a, b
+a
+b
+end
 Delta:
 (q0, a, q0)
 (q0, b, q1)
@@ -13,7 +20,8 @@ Delta:
 (q3, b, q1)
 (q4, a, q4)
 (q4, b, q4)
-Start State:
+Start:
 q0
+end
 F:
 q4
