@@ -1,7 +1,6 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,6 +11,7 @@ public class dfa {
     private String[][] delta;
     private String start;
     private ArrayList<String> acceptStates;
+    private ArrayList<String> storeDeltaFromFile;
 
     //Default constructor
     public dfa(){
@@ -28,6 +28,7 @@ public class dfa {
         states = new ArrayList<String>();
         alphabet = new ArrayList<String>();
         acceptStates = new ArrayList<String>();
+        storeDeltaFromFile = new ArrayList<String>();
 
         /*Processing information from the file*/
         Scanner sc = new Scanner(dfa);
@@ -37,9 +38,7 @@ public class dfa {
                 //System.out.print("Set of states.\n");
                 while(sc.hasNextLine()){
                     String state = sc.nextLine();
-                    if(state.contentEquals("end")){
-                        break;
-                    }
+                    if(state.contentEquals("end")) break;
                     else states.add(state);
                 }
             }
@@ -47,40 +46,64 @@ public class dfa {
                 //System.out.print("Sigma\n");
                 while(sc.hasNextLine()){
                     String letter = sc.nextLine();
-                    if(letter.contentEquals("end")){
-                        break;
-                    }
+                    if(letter.contentEquals("end")) break;
                     else alphabet.add(letter);
                 }
             }
             else if(line.contentEquals("Delta:")){
                 //System.out.print("Delta\n");
+                while(sc.hasNextLine()){
+                    String transition = sc.nextLine();
+                    if(transition.contentEquals("end")) break;
+                    else storeDeltaFromFile.add(transition);
+                }
             }
             else if(line.contentEquals("Start:")){
                 //System.out.print("start state is \n");
                 while(sc.hasNextLine()){
                     String startState = sc.nextLine();
-                    if(startState.contentEquals("end")){
-                        break;
-                    }
-                    else{
-                        start = startState;
-                    }
+                    if(startState.contentEquals("end")) break;
+                    else start = startState;
                 }
             }
             else if(line.contentEquals("F:")){
                 //System.out.print("Accept States are\n");
                 while(sc.hasNextLine()){
                     String acceptState = sc.nextLine();
-                    if(acceptState.contentEquals("end")){
-                        break;
-                    }
-                    else{
-                        acceptStates.add(acceptState);
-                    }
+                    if(acceptState.contentEquals("end")) break;
+                    else acceptStates.add(acceptState);
                 }
             }
         }
+    }
+
+    /*Function definitions*/
+    //processDelta
+    //We know if its an odd row or even row because of the format we are using
+    //in the text file.
+    void processDelta(){
+        int state = 0;
+        int letter;
+        delta = new String[this.getStates().size()][this.getAlphabet().size()];
+        for(String transition : this.getStoreDeltaFromFile()){
+            //we are odd row in table
+            if(transition.contains("a")){
+                letter = 0;
+                delta[state][letter] = transition.substring(transition.lastIndexOf("a,") + 3);
+            }
+            //even row on table
+            else if(transition.contains("b")){
+                letter  = 1;
+                delta[state][letter] = transition.substring(transition.lastIndexOf("b,") + 3);
+                state += 1;  //increment the state
+                //we only increment state here because it changes every other line.
+            }
+        }
+    }
+
+    /*Our algorithm*/
+    public String transformDfaToRegex(){
+        return "hi";
     }
 
     /*Getters and Setters*/
@@ -98,6 +121,14 @@ public class dfa {
 
     public ArrayList<String> getAcceptStates(){
         return this.acceptStates;
+    }
+
+    public ArrayList<String> getStoreDeltaFromFile(){
+        return this.storeDeltaFromFile;
+    }
+
+    public String[][] getDelta(){
+        return delta;
     }
 
 }
