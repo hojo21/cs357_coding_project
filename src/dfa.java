@@ -103,6 +103,16 @@ public class dfa {
 
     /*Our algorithm*/
     public String transformDfaToRegex(){
+        int numStates = this.getStates().size();
+        int alphabetSize = this.getAlphabet().size();
+        //System.out.println("number of states" + numStates);
+        String[][] stateTable = new String[numStates+2][numStates+2];
+        for(int i = 0; i<numStates; i++){
+            for(int j = 0; j<numStates; j++){
+                //not yet implemented.
+            }
+        }
+        //for now return this bullshit
         return "hi";
     }
 

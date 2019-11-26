@@ -47,6 +47,7 @@ public class main {
         System.out.println("Number of states: " + numberOfstates);
         System.out.println("Number of letters in alphabelt " + alphabetSize);
         */
+        /*
         //testing delta 2d array
         String[][] my2dArray = myDFA.getDelta();
         int state;
@@ -55,12 +56,8 @@ public class main {
                 System.out.println(myDFA.getDelta()[state][letter]);
             }
         }
+         */
 
-
-    }
-
-    // reads the input file of the formal description and sorts data
-    public String readFile(String formalDescription){
-        return formalDescription;
+        myDFA.transformDfaToRegex();
     }
 }
