@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class dfa {
     //Initialize start variables.
@@ -110,29 +111,33 @@ public class dfa {
         for(String transition : this.getStoreDeltaFromFile()){
             String[] line;
             line = transition.split(", ");
-            String stateFrom = line[0];
+            String stateFrom = line[0].substring(1);
+            int stateF = Integer.parseInt(stateFrom);
             String letter = line[1];
-            String stateTo = line[2];
+            String stateTo = line[2].substring(1);
+            int stateT = Integer.parseInt(stateTo);
 
+            if(stateF == stateT){
+                stateTable[stateF][stateT] = "";
+            }
+            else {
+                stateTable[stateF][stateT] = "(" + letter + ")";
+            }
+            //System.out.println(stateFrom + " " + stateF + " " +  stateTo + " " + stateT);
+        }
 
-            //System.out.println(stateFrom + " " + letter + " " +  stateTo);
+        //for debugging. 
+        for(int i = 0; i<numStates; i++){
+            for(int j = 0; j<numStates; j++){
+                System.out.println(" " + stateTable[i][j]);
+            }
         }
     }
 
     /*Our algorithm*/
     public String transformDfaToRegex(){
-
-        //process state table. 
-        int numStates = this.getStates().size();
-        int alphabetSize = this.getAlphabet().size();
-        //System.out.println("number of states" + numStates);
-        String[][] stateTable = new String[numStates+2][numStates+2];
-        //iterate through delta function
-        for(int i = 0; i<numStates; i++){
-            for(int j = 0; j<alphabetSize; j++){
-                //do nothing for now
-            }
-        }
+        //create a state table.
+        this.processStateTable();
         //for now return this bullshit
         return "hi";
     }
