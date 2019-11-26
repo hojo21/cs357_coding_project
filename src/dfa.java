@@ -101,15 +101,36 @@ public class dfa {
         }
     }
 
+    //this will be for the transformation algorithm.
+    void processStateTable(){
+        int numStates = this.getStates().size();
+        int alphabetSize = this.getAlphabet().size();
+        String[][] stateTable = new String[numStates+2][numStates+2];
+
+        for(String transition : this.getStoreDeltaFromFile()){
+            String[] line;
+            line = transition.split(", ");
+            String stateFrom = line[0];
+            String letter = line[1];
+            String stateTo = line[2];
+
+
+            //System.out.println(stateFrom + " " + letter + " " +  stateTo);
+        }
+    }
+
     /*Our algorithm*/
     public String transformDfaToRegex(){
+
+        //process state table. 
         int numStates = this.getStates().size();
         int alphabetSize = this.getAlphabet().size();
         //System.out.println("number of states" + numStates);
         String[][] stateTable = new String[numStates+2][numStates+2];
+        //iterate through delta function
         for(int i = 0; i<numStates; i++){
-            for(int j = 0; j<numStates; j++){
-                //not yet implemented.
+            for(int j = 0; j<alphabetSize; j++){
+                //do nothing for now
             }
         }
         //for now return this bullshit

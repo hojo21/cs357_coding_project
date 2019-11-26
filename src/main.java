@@ -57,7 +57,7 @@ public class main {
             }
         }
          */
-
-        myDFA.transformDfaToRegex();
+        myDFA.processStateTable();
+       // myDFA.transformDfaToRegex();
     }
 }
