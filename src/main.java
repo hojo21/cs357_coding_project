@@ -21,7 +21,7 @@ public class main {
 
     public static void main(String args[]) throws FileNotFoundException {
         System.out.println("Hello World");
-        File myFile = new File("/Users/jordanho/Documents/cs357_coding_project/src/dfa.txt");
+        File myFile = new File("C:\\Users\\go4ma\\IdeaProjects\\cs357_coding_project\\src\\dfa.txt");
         dfa myDFA = new dfa(myFile);
 
 

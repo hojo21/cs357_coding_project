@@ -117,18 +117,39 @@ public class dfa {
             String stateTo = line[2].substring(1);
             int stateT = Integer.parseInt(stateTo);
 
+            //check if we need a union
             if(stateF == stateT && stateTable[stateF][stateT] != null){
                 stateTable[stateF][stateT] += "U(" + letter + ")";
             }
+            //check if start state
+            //no need for for loop since there is only one accept state, but must still
+            //do the normal table filling. THus, the nested if-else.
+            else if(line[2].contentEquals(this.getStart())){
+                stateTable[numStates][stateT] = "e";
+                if(stateF == stateT && stateTable[stateF][stateT] != null){
+                    stateTable[stateF][stateT] += "U(" + letter + ")";
+                }
+                else {
+                    stateTable[stateF][stateT] = "(" + letter + ")";
+                }
+            }
             else {
                 stateTable[stateF][stateT] = "(" + letter + ")";
+            }
+
+            //check if accept state.
+            //need to use for loop since it can be a collection.
+            for(String accept : this.getAcceptStates()){
+                if(line[0].contentEquals(accept)){
+                    stateTable[stateF][numStates+1] = "e";
+                }
             }
             //System.out.println(stateFrom + " " + stateF + " " +  stateTo + " " + stateT);
         }
 
         //for debugging.
-        for(int i = 0; i<numStates; i++){
-            for(int j = 0; j<numStates; j++){
+        for(int i = 0; i<numStates+2; i++){
+            for(int j = 0; j<numStates+2; j++){
                 System.out.println(" " + stateTable[i][j]);
             }
         }
