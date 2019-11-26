@@ -117,8 +117,8 @@ public class dfa {
             String stateTo = line[2].substring(1);
             int stateT = Integer.parseInt(stateTo);
 
-            if(stateF == stateT){
-                stateTable[stateF][stateT] = "";
+            if(stateF == stateT && stateTable[stateF][stateT] != null){
+                stateTable[stateF][stateT] += "U(" + letter + ")";
             }
             else {
                 stateTable[stateF][stateT] = "(" + letter + ")";
@@ -126,7 +126,7 @@ public class dfa {
             //System.out.println(stateFrom + " " + stateF + " " +  stateTo + " " + stateT);
         }
 
-        //for debugging. 
+        //for debugging.
         for(int i = 0; i<numStates; i++){
             for(int j = 0; j<numStates; j++){
                 System.out.println(" " + stateTable[i][j]);
