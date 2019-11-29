@@ -12,6 +12,7 @@ public class dfa {
     private String start;
     private ArrayList<String> acceptStates;
     private ArrayList<String> storeDeltaFromFile;
+    private String[][] stateTable;
 
     //Default constructor
     public dfa(){
@@ -105,7 +106,7 @@ public class dfa {
     void processStateTable(){
         int numStates = this.getStates().size();
         int alphabetSize = this.getAlphabet().size();
-        String[][] stateTable = new String[numStates+2][numStates+2];
+        stateTable = new String[numStates+2][numStates+2];
 
         for(String transition : this.getStoreDeltaFromFile()){
             String[] line;
@@ -147,20 +148,55 @@ public class dfa {
         }
 
         //for debugging.
+        /*
         for(int i = 0; i<numStates+2; i++){
             for(int j = 0; j<numStates+2; j++){
                 System.out.println(" " + stateTable[i][j]);
             }
         }
+         */
     }
 
     /*Our algorithm*/
-    public String transformDfaToRegex(){
+    public String transformDfaToRegex() {
         //create a state table.
         this.processStateTable();
-        //for now return this bullshit
+        int stateTableSize = this.getStates().size() + 2;
+        ArrayList<String> from = new ArrayList<String>();
+        int stateToRip = 0;
+        int statesLeft = this.getStates().size();
+        int numStates = this.getStates().size();
+        String regex = "";
+
+        while (statesLeft != 0) {
+            for (int i = 0; i < stateTableSize; i++) {
+                for (int j = 0; j < stateTableSize; j++) {
+                    //check the row f'
+                    /*
+                    if(i == numStates-1){
+                        if(this.getStateTable()[i][j] != null){
+                            //add to string
+                            regex = regex.concat(this.getStateTable()[i][j]);
+                        }
+                    }
+                    else if(j == numStates-1){
+                        if(this.getStateTable()[i][j] != null){
+                            regex = regex.concat(this.getStateTable()[i][j]);
+                        }
+                    }
+                    else if(i == numStates-1 && j == numStates){
+                        if(this.getStateTable()[i][j] != null){
+                            regex = regex.concat(this.getStateTable()[i][j] + "*");
+                        }
+                     */
+                }
+            }
+            statesLeft -= 1;
+        }
+        //System.out.println("The regex: " + regex);
         return "hi";
     }
+        //for now return this bullshit
 
     /*Getters and Setters*/
     public ArrayList<String> getStates(){
@@ -184,7 +220,11 @@ public class dfa {
     }
 
     public String[][] getDelta(){
-        return delta;
+        return this.delta;
+    }
+
+    public String[][] getStateTable(){
+        return this.stateTable;
     }
 
 }
