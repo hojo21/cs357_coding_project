@@ -4,6 +4,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author Gabe Marcial
+ * @author Jordan Ho
+ * dfa class
+ **/
 public class dfa {
     //Initialize start variables.
     private ArrayList<String> states;

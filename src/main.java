@@ -1,13 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 
-/*
+/**
 * @author Gabe Marcial
 * @author Jordan Ho
 * CS 357
 * Coding Project
 * Converting DFA to Regular Expression.
- */
+ **/
 
 //TODO: "/Users/jordanho/Documents/cs357_coding_project/src/dfa.txt"
 public class main {
