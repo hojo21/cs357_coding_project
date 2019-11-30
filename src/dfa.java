@@ -241,7 +241,7 @@ public class dfa {
                 }
             }
         }
-        //TODO: fix this return statement 
+        //TODO: fix this return statement
         return new String[0][];
     }
 
