@@ -203,14 +203,20 @@ public class dfa {
     }
         //for now return this bullshit
 
+    // rips state from 2d array data table by getting rid of the 0 row and column
     public String[][] ripState(String[][] stateTable){
         String[][] newTable = new String[0][0];
         int stateTableSize = this.getStates().size() + 2;
         for(int i=0; i<stateTableSize; i++){
             for(int j=0; j<stateTableSize; j++){
                 // copying information from the larger state table into the small starting from the first row and column
+                // only copies data into the table if the opening is null, meaning it does not have to union
                 if(stateTable[0][j] != null && stateTable[1][j+1] == null){
                     stateTable[0][j] = newTable[0][j];
+                }
+                // unions row 0 with row 1 
+                if(stateTable[0][j] != null && stateTable[1][j+1] != null){
+
                 }
                 // copies data from the first column
                 if(i >= 1){
