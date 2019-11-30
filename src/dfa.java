@@ -207,6 +207,9 @@ public class dfa {
     public String[][] ripState(String[][] stateTable){
         String[][] newTable = new String[0][0];
         int stateTableSize = this.getStates().size() + 2;
+        String stateString = new String("");
+        String newString = new String("");
+        String unionString = new String("");
         for(int i=0; i<stateTableSize; i++){
             for(int j=0; j<stateTableSize; j++){
                 // copying information from the larger state table into the small starting from the first row and column
@@ -214,13 +217,26 @@ public class dfa {
                 if(stateTable[0][j] != null && stateTable[1][j+1] == null){
                     stateTable[0][j] = newTable[0][j];
                 }
-                // unions row 0 with row 1 
+                // unions row 0 with row 1
                 if(stateTable[0][j] != null && stateTable[1][j+1] != null){
-
+                    stateString = stateTable[0][j];
+                    newString = stateTable[1][j+1];
+                    unionString = stateString + "U" + newString;
+                    System.out.println(stateString);
+                    System.out.println(newString);
+                    System.out.println(unionString);
+                    newTable[0][j] = newString;
                 }
-                // copies data from the first column
-                if(i >= 1){
-
+                // copies data from the first column into the first column of the new table and unions if necessary
+                if(i >= 1 && j == 0){
+                    if(stateTable[i][0] != null && stateTable[i+1][0] == null){
+                        stateTable[i][0] = newTable[i][0];
+                    }
+                    if(stateTable[i][0] != null && stateTable[i+1][0] != null){
+                        stateString = stateTable[i][0];
+                        newString = stateTable[i+1][0];
+                        //unionString =
+                    }
                 }
             }
         }
