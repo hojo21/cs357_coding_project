@@ -263,11 +263,13 @@ public class dfa {
                     if(stateTable[i][0] != null && stateTable[i+1][0] != null){
                         stateString = stateTable[i][0];
                         newString = stateTable[i+1][0];
-                        //unionString =
+                        unionString = stateString + "U" + newString;
+                        newTable[i][0] = unionString;
                     }
                 }
             }
         }
+        //TODO: fix this return statement 
         return new String[0][];
     }
 
