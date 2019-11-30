@@ -165,7 +165,7 @@ public class dfa {
     /*Our algorithm*/
     public String transformDfaToRegex() {
         //create a state table.
-        this.processStateTable();
+        processStateTable();
         int stateTableSize = this.getStates().size() + 2;
         ArrayList<String> from = new ArrayList<String>();
         int stateToRip = 0;
@@ -176,6 +176,32 @@ public class dfa {
         while (statesLeft != 0) {
             for (int i = 0; i < stateTableSize; i++) {
                 for (int j = 0; j < stateTableSize; j++) {
+                    //checking first box
+                    //since i and j are equal it means that a state
+                    //goes to themselves thus we must concatenate the content*
+                    if(i == 0 && j == 0){
+                        if(this.getStateTable()[i][j] != null){
+                            regex = regex + this.getStateTable()[i][j] + "*";
+                        }
+                    }
+                    //checking the first row
+                    else if(i == 0 && j !=0){
+                        if(this.getStateTable()[i][j] != null){
+                            regex = regex + this.getStateTable()[i][j];
+                        }
+                    }
+                    //checking the first column
+                    else if(j == 0 && i != 0){
+                        if(this.getStateTable()[i][j] != null) {
+                            regex = regex + this.getStateTable()[i][j];
+                        }
+                    }
+                    else{
+                        //just breaking the inner loop.
+                        break;
+                    }
+
+
                     //check the row f'
                     /*
                     if(i == numStates-1){
@@ -196,6 +222,8 @@ public class dfa {
                      */
                 }
             }
+            System.out.println(regex);
+            //this.ripState();
             statesLeft -= 1;
         }
         //System.out.println("The regex: " + regex);
