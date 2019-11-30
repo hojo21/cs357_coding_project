@@ -25,7 +25,6 @@ public class main {
         File myFile = new File("/Users/jordanho/Documents/cs357_coding_project/src/dfa.txt");
         dfa myDFA = new dfa(myFile);
 
-
         /*For debugging purposes
         System.out.println("Set of states:");
         for(String state : myDFA.getStates()){
@@ -63,7 +62,8 @@ public class main {
         }
          */
         myDFA.processStateTable();
-
-       String regex = myDFA.transformDfaToRegex();
+        String[][] tempTable = new String[7][7];
+        tempTable = myDFA.ripState(myDFA.getStateTable());
+       //String regex = myDFA.transformDfaToRegex();
     }
 }
