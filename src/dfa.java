@@ -203,6 +203,24 @@ public class dfa {
     }
         //for now return this bullshit
 
+    public String[][] ripState(String[][] stateTable){
+        String[][] newTable = new String[0][0];
+        int stateTableSize = this.getStates().size() + 2;
+        for(int i=0; i<stateTableSize; i++){
+            for(int j=0; j<stateTableSize; j++){
+                // copying information from the larger state table into the small starting from the first row and column
+                if(stateTable[0][j] != null && stateTable[1][j+1] == null){
+                    stateTable[0][j] = newTable[0][j];
+                }
+                // copies data from the first column
+                if(i >= 1){
+
+                }
+            }
+        }
+        return new String[0][];
+    }
+
     /*Getters and Setters*/
     public ArrayList<String> getStates(){
         return this.states;
