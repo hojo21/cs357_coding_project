@@ -22,9 +22,8 @@ public class main {
 
     public static void main(String args[]) throws FileNotFoundException {
         System.out.println("Hello World");
-        File myFile = new File("src/dfa.txt");
+        File myFile = new File("/Users/jordanho/Documents/cs357_coding_project/src/dfa.txt");
         dfa myDFA = new dfa(myFile);
-
 
         /*For debugging purposes
         System.out.println("Set of states:");
@@ -62,10 +61,9 @@ public class main {
             }
         }
          */
-        //myDFA.processStateTable();
-        //String[][] someArray = new String[7][7];
-        //someArray = myDFA.ripState(myDFA.getStateTable());
-
-        String regex = myDFA.transformDfaToRegex();
+        myDFA.processStateTable();
+        String[][] tempTable = new String[7][7];
+        tempTable = myDFA.ripState(myDFA.getStateTable());
+       //String regex = myDFA.transformDfaToRegex();
     }
 }

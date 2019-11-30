@@ -217,7 +217,7 @@ public class dfa {
 
     // rips state from 2d array data table by getting rid of the 0 row and column
     public String[][] ripState(String[][] stateTable){
-        String[][] newTable = new String[0][0];
+        String[][] newTable = new String[7][7];
         int stateTableSize = this.getStates().size() + 2;
         String stateString = new String("");
         String newString = new String("");
@@ -253,7 +253,7 @@ public class dfa {
                 }
             }
         }
-        //TODO: fix this return statement 
+        //TODO: fix this return statement
         return new String[0][];
     }
 
