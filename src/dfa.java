@@ -171,7 +171,10 @@ public class dfa {
         int stateToRip = 0;
         int statesLeft = this.getStates().size();
         int numStates = this.getStates().size();
-        String regex = "";
+        String regexLeaving = "";
+        String regexArriving = "";
+        ArrayList<Integer> statesTo = new ArrayList<Integer>();
+        ArrayList<Integer> statesFrom = new ArrayList<Integer>();
 
         while (statesLeft != 0) {
             for (int i = 0; i < stateTableSize; i++) {
@@ -181,55 +184,71 @@ public class dfa {
                     //goes to themselves thus we must concatenate the content*
                     if(i == 0 && j == 0){
                         if(this.getStateTable()[i][j] != null){
-                            regex = regex + this.getStateTable()[i][j] + "*";
+                            regexLeaving = regexLeaving + this.getStateTable()[i][j] + "*";
+                            if(!(this.stateTable[i][j].contentEquals("e"))) {
+                                statesTo.add(j);
+                            }
                         }
                     }
                     //checking the first row
                     else if(i == 0 && j !=0){
                         if(this.getStateTable()[i][j] != null){
-                            regex = regex + this.getStateTable()[i][j];
+                            regexLeaving = regexLeaving + this.getStateTable()[i][j];
+                            if(!(this.stateTable[i][j].contentEquals("e"))) {
+                                statesTo.add(j);
+                            }
                         }
                     }
                     //checking the first column
                     else if(j == 0 && i != 0){
                         if(this.getStateTable()[i][j] != null) {
-                            regex = regex + this.getStateTable()[i][j];
+                            regexArriving = regexArriving + this.getStateTable()[i][j];
+                            if(!(this.stateTable[i][j].contentEquals("e"))) {
+                                statesFrom.add(i);
+                            }
                         }
                     }
                     else{
                         //just breaking the inner loop.
                         break;
                     }
-
-
-                    //check the row f'
-                    /*
-                    if(i == numStates-1){
-                        if(this.getStateTable()[i][j] != null){
-                            //add to string
-                            regex = regex.concat(this.getStateTable()[i][j]);
-                        }
-                    }
-                    else if(j == numStates-1){
-                        if(this.getStateTable()[i][j] != null){
-                            regex = regex.concat(this.getStateTable()[i][j]);
-                        }
-                    }
-                    else if(i == numStates-1 && j == numStates){
-                        if(this.getStateTable()[i][j] != null){
-                            regex = regex.concat(this.getStateTable()[i][j] + "*");
-                        }
-                     */
                 }
             }
-            System.out.println(regex);
-            //this.ripState();
+            //TODO: Add these regular expressions to there corresponding place in the new
+            // 2d array possibly by adding parameters to the ripstate
+            // method. And since the 2d array will be updated, we will need to make a setter for state table.
+            for(int stateTo : statesTo){
+                System.out.println(stateTo);
+                if(this.stateTable[stateTableSize - 2][stateTo] != null) {
+                    this.stateTable[stateTableSize - 2][stateTo] = this.stateTable[stateTableSize - 2][stateTo] + regexLeaving;
+                }
+                else{
+                    this.stateTable[stateTableSize - 2][stateTo] = regexLeaving;
+                }
+            }
+            for(int stateFrom : statesFrom){
+                System.out.println(stateFrom);
+                if(this.stateTable[stateFrom][stateTableSize-2] != null) {
+                    this.stateTable[stateFrom][stateTableSize-2] = this.stateTable[stateFrom][stateTableSize-2] + regexArriving;
+                }
+                else{
+                    this.stateTable[stateFrom][stateTableSize-2] = regexArriving;
+                }
+            }
+            //for(String state : this.states){
+                //if()
+            //}
+            this.states.remove(0);
+            this.stateTable = this.ripState(this.stateTable);
+            regexLeaving = "";
+            regexArriving = "";
+            stateTableSize -= 1; //for the for loops up above.
             statesLeft -= 1;
+            break; ///just for now.
         }
         //System.out.println("The regex: " + regex);
         return "hi";
     }
-        //for now return this bullshit
 
     // rips state from 2d array data table by getting rid of the 0 row and column
     public String[][] ripState(String[][] stateTable){
