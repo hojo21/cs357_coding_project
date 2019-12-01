@@ -239,7 +239,7 @@ public class dfa {
                 //if()
             //}
             this.states.remove(0);
-            this.stateTable = this.ripState(this.stateTable);
+            //this.stateTable = this.ripState(this.stateTable);
             regexLeaving = "";
             regexArriving = "";
             stateTableSize -= 1; //for the for loops up above.

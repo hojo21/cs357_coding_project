@@ -63,6 +63,20 @@ public class main {
          */
         myDFA.processStateTable();
         String nun = myDFA.transformDfaToRegex();
+        int a = 0;
+        System.out.println(myDFA.getStateTable()[0][0]);
+        System.out.println(myDFA.getStateTable()[0][1]);
+        System.out.println(myDFA.getStateTable()[1][1]);
+        System.out.println(myDFA.getStateTable()[1][2]);
+        System.out.println(myDFA.getStateTable()[2][0]);
+        System.out.println(myDFA.getStateTable()[2][3]);
+        System.out.println(myDFA.getStateTable()[2][5]);
+        System.out.println(myDFA.getStateTable()[3][1]);
+        System.out.println(myDFA.getStateTable()[3][4]);
+        System.out.println(myDFA.getStateTable()[4][4]);
+        System.out.println(myDFA.getStateTable()[4][6]);
+        System.out.println(myDFA.getStateTable()[5][0]);
+        System.out.println(myDFA.getStateTable()[5][1]);
         for(int i = 0; i<myDFA.getStates().size()+2; i++){
             for(int j = 0; j<myDFA.getStates().size()+2; j++){
                 System.out.println(myDFA.getStateTable()[i][j]);
