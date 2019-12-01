@@ -233,32 +233,50 @@ public class dfa {
 
     // rips state from 2d array data table by getting rid of the 0 row and column
     public String[][] ripState(String[][] stateTable){
-        String[][] newTable = new String[7][7];
-        int stateTableSize = this.getStates().size() + 2;
+        int stateTableSize = this.getStates().size() - 1;
+        String[][] newTable = new String[stateTableSize][stateTableSize];
         String stateString = new String("");
         String newString = new String("");
         String unionString = new String("");
+
+        // copies data from stateTable into newTable
+        /**
+        for(int i=0; i<stateTableSize; i++){
+            for(int j=0; j<stateTableSize; j++){
+                if(stateTable[i][j] != null){
+                    newTable[i][j] = stateTable[i][j];
+                }
+                System.out.println(newTable[i][j]);
+            }
+        }
+         **/
+
         for(int i=0; i<stateTableSize; i++){
             for(int j=0; j<stateTableSize; j++){
                 // copying information from the larger state table into the small starting from the first row and column
                 // only copies data into the table if the opening is null, meaning it does not have to union
+                if(stateTable[i][j] != null){
+                    newTable[i][j] = stateTable[i][j];
+                }
                 if(stateTable[0][j] != null && stateTable[1][j+1] == null){
-                    stateTable[0][j] = newTable[0][j];
+                    newTable[0][j] = stateTable[0][j];
                 }
                 // unions row 0 with row 1
                 if(stateTable[0][j] != null && stateTable[1][j+1] != null){
                     stateString = stateTable[0][j];
                     newString = stateTable[1][j+1];
                     unionString = stateString + "U" + newString;
-                    System.out.println(stateString);
-                    System.out.println(newString);
-                    System.out.println(unionString);
+                    //System.out.println(stateString);
+                    //System.out.println(newString);
+                    //System.out.println(unionString);
                     newTable[0][j] = newString;
                 }
+                // creates star loop if transition goes back to the same state
+
                 // copies data from the first column into the first column of the new table and unions if necessary
                 if(i >= 1 && j == 0){
                     if(stateTable[i][0] != null && stateTable[i+1][0] == null){
-                        stateTable[i][0] = newTable[i][0];
+                        newTable[i][0] = stateTable[i][0];
                     }
                     if(stateTable[i][0] != null && stateTable[i+1][0] != null){
                         stateString = stateTable[i][0];
@@ -267,8 +285,11 @@ public class dfa {
                         newTable[i][0] = unionString;
                     }
                 }
+                System.out.println(newTable[i][j]);
             }
         }
+
+
         //TODO: fix this return statement
         return new String[0][];
     }
