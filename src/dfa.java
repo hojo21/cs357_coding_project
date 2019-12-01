@@ -235,6 +235,10 @@ public class dfa {
                     this.stateTable[stateFrom][stateTableSize-2] = regexArriving;
                 }
             }
+            //for(String state : this.states){
+                //if()
+            //}
+            this.states.remove(0);
             this.stateTable = this.ripState(this.stateTable);
             regexLeaving = "";
             regexArriving = "";
