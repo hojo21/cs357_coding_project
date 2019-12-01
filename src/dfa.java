@@ -255,10 +255,13 @@ public class dfa {
             for(int j=0; j<stateTableSize; j++){
                 // copying information from the larger state table into the small starting from the first row and column
                 // only copies data into the table if the opening is null, meaning it does not have to union
+                /**
                 if(stateTable[i][j] != null){
                     newTable[i][j] = stateTable[i][j];
-                }
-                if(stateTable[0][j] != null && stateTable[1][j+1] == null){
+                }**/
+
+                // copies data from stateTable row 1 into newTable row 1 if there is no necessary union
+                if(stateTable[0][j] != null && stateTable[0][j+1] == null){
                     newTable[0][j] = stateTable[0][j];
                 }
                 // unions row 0 with row 1
@@ -285,7 +288,7 @@ public class dfa {
                         newTable[i][0] = unionString;
                     }
                 }
-                System.out.println(newTable[i][j]);
+                //System.out.println(newTable[i][j]);
             }
         }
 
