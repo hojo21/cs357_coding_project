@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 
 //TODO: "/Users/jordanho/Documents/cs357_coding_project/src/dfa.txt"
     //C:\Users\go4ma\IdeaProjects\cs357_coding_project\src\dfa.txt
+
 public class main {
     // instance variables
     private String formalDescription;
@@ -20,6 +21,11 @@ public class main {
     private String startingState;
     private String acceptingStates;
 
+    /**
+     * main method 
+     * @param args
+     * @throws FileNotFoundException
+     */
     public static void main(String args[]) throws FileNotFoundException {
         System.out.println("Hello World");
         File myFile;
