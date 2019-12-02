@@ -22,12 +22,7 @@ public class dfa {
     //Default constructor
     public dfa(){
     }
-    //Parameter constructor constructor
-    public dfa(ArrayList<String> setOfStates, ArrayList<Character> sigma, String[][] transTable, String startState,
-               ArrayList<String> setOfAccept){
-        states = setOfStates;
 
-    }
     //file constructor
     public dfa(File dfa) throws FileNotFoundException {
         /*Allocating instance variables*/
@@ -214,9 +209,7 @@ public class dfa {
                     }
                 }
             }
-            //TODO: Add these regular expressions to there corresponding place in the new
-            // 2d array possibly by adding parameters to the ripstate
-            // method. And since the 2d array will be updated, we will need to make a setter for state table.
+
             for(int stateTo : statesTo){
                 System.out.println(stateTo);
                 if(this.stateTable[stateTableSize - 2][stateTo] != null) {
