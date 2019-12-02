@@ -263,8 +263,11 @@ public class dfa {
 
         for(int i=0; i<stateTableSize; i++){
             for(int j=0; j<stateTableSize; j++){
-                newTable[i][j] = stateTable[i][j];
-                System.out.println(newTable[i][j]);
+                if (stateTable[i][j] != null) {
+                    newTable[i][j] = stateTable[i][j];
+                    System.out.println(newTable[i][j]);
+                }
+
             }
         }
         System.out.println("----------------------");
@@ -279,9 +282,12 @@ public class dfa {
                 if(y == 0){
                     continue;
                 }
-                newTable[p][q] = stateTable[x][y];
-                System.out.println(newTable[p][q]);
-                q++;
+                if (stateTable[x][y] != null) {
+                    newTable[x][y] = stateTable[x][y];
+                    newTable[p][q] = stateTable[x][y];
+                    System.out.println(newTable[p][q]);
+                    q++;
+                }
             }
             p++;
         }
