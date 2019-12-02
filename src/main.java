@@ -23,7 +23,7 @@ public class main {
     public static void main(String args[]) throws FileNotFoundException {
         System.out.println("Hello World");
         File myFile;
-        myFile = new File("C:\\Users\\go4ma\\IdeaProjects\\cs357_coding_project\\src\\dfa.txt");
+        myFile = new File("out/production/coding_project/dfa.txt");
         dfa myDFA = new dfa(myFile);
         myDFA.errorChecking();
         /*For debugging purposes
