@@ -271,7 +271,7 @@ public class dfa {
 
             for(int stateTo : statesTo){
                 System.out.println(stateTo);
-                if(this.stateTable[stateTableSize - 2][stateTo] != null) {
+                if(this.stateTable[stateTableSize - 2][stateTo] != null && (stateTableSize-2) != stateTo) {
                     this.stateTable[stateTableSize - 2][stateTo] = this.stateTable[stateTableSize - 2][stateTo] + regexLeaving;
                 }
                 else{
@@ -280,29 +280,51 @@ public class dfa {
             }
             for(int stateFrom : statesFrom){
                 System.out.println(stateFrom);
-                if(this.stateTable[stateFrom][stateTableSize-2] != null) {
+                if((this.stateTable[stateFrom][stateTableSize - 2] != null) && (stateTableSize-2) != stateFrom) {
                     this.stateTable[stateFrom][stateTableSize-2] = this.stateTable[stateFrom][stateTableSize-2] + regexArriving;
                 }
                 else{
                     this.stateTable[stateFrom][stateTableSize-2] = regexArriving;
                 }
             }
+            //printing the table each time.
+            System.out.println("===========================");
+            for(int i = 0; i<this.states.size()+2; i++) {
+                for (int j = 0; j < this.states.size() + 2; j++) {
+                    System.out.println(this.stateTable[i][j]);
+                }
+            }
 
             this.ripState(this.stateTable);
-            regexLeaving = "";
+            System.out.print("Regex leaving: "+ regexLeaving);
+            //regexLeaving = "";
             regexArriving = "";
             stateTableSize -= 1; //for the for loops up above.
             statesLeft -= 1;
-            break; ///just for now.
+            statesFrom.removeAll(statesFrom);
+            statesTo.removeAll(statesTo);
         }
-        return "hi";
+        return this.stateTable[0][0];
+    }
+
+    public String cleanRegex(String regex){
+        String newRegex;
+        int index = 0;
+        if(regex.contains("e")){
+            index = regex.lastIndexOf('e');
+            newRegex = regex.substring(0, index);
+            newRegex = newRegex + "Σ*";
+            return newRegex;
+        }
+        newRegex = regex;
+        return newRegex;
     }
 
     // rips state from 2d array data table by getting rid of the 0 row and column
     public void ripState(String[][] stateTable){
         int stateTableSize = this.getStates().size()+2;
         int newTableSize = this.getStates().size() + 2;
-        System.out.println(stateTableSize);
+       // System.out.println(stateTableSize);
         String[][] newTable = new String[stateTableSize][stateTableSize];
         String[][] tempTable = new String[newTableSize][newTableSize];
         String stateString = new String("");
@@ -316,13 +338,13 @@ public class dfa {
             for(int j=0; j<stateTableSize; j++){
                 //if (stateTable[i][j] != null) {
                     newTable[i][j] = stateTable[i][j];
-                    System.out.println(newTable[i][j]);
+                   // System.out.println(newTable[i][j]);
                 //}
 
             }
         }
-        System.out.println("----------------------");
-        System.out.println("state size: "+ stateTableSize);
+        //System.out.println("----------------------");
+        //System.out.println("state size: "+ stateTableSize);
 
         /*
         for(int a=1; a<stateTableSize;a++){
@@ -353,7 +375,7 @@ public class dfa {
                     newTable[p][q] = stateTable[x][y];
                     //newTable[p][q] = stateTable[x][y];
 
-                    System.out.println(newTable[p][q]);
+                    //System.out.println(newTable[p][q]);
                     q++;
                 //}
             }
