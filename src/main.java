@@ -78,6 +78,8 @@ public class main {
         System.out.println(myDFA.getStateTable()[4][6]);
         System.out.println(myDFA.getStateTable()[5][0]);
         System.out.println(myDFA.getStateTable()[5][1]);
+
+        System.out.println("!!!!!!!!!!!!");
         for(int i = 0; i<myDFA.getStates().size()+2; i++){
             for(int j = 0; j<myDFA.getStates().size()+2; j++){
                 //System.out.println(myDFA.getStateTable()[i][j]);
