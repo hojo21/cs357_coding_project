@@ -145,12 +145,12 @@ public class dfa {
         int letter;
         delta = new String[this.getStates().size()][this.getAlphabet().size()];
         for (String transition : this.getStoreDeltaFromFile()) {
-            //we are odd row in table
+            //We are odd row in table
             if (transition.contains("a")) {
                 letter = 0;
                 delta[state][letter] = transition.substring(transition.lastIndexOf("a,") + 3);
             }
-            //even row on table
+            //Even row on table
             else if (transition.contains("b")) {
                 letter = 1;
                 delta[state][letter] = transition.substring(transition.lastIndexOf("b,") + 3);

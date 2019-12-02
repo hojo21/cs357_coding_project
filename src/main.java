@@ -20,7 +20,7 @@ public class main {
      */
     public static void main(String args[]) throws FileNotFoundException {
         File myFile;
-        myFile = new File("out/production/coding_project/dfa4.txt");
+        myFile = new File("out/production/coding_project/dfa5.txt");
         dfa myDFA = new dfa(myFile);
         System.out.println("\n\n");
         myDFA.errorChecking();
