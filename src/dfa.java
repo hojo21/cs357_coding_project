@@ -287,23 +287,19 @@ public class dfa {
                     this.stateTable[stateFrom][stateTableSize-2] = regexArriving;
                 }
             }
-            //for(String state : this.states){
-                //if()
-            //}
-            //this.states.remove(0);
-            this.stateTable = this.ripState(this.stateTable);
+
+            this.ripState(this.stateTable);
             regexLeaving = "";
             regexArriving = "";
             stateTableSize -= 1; //for the for loops up above.
             statesLeft -= 1;
             break; ///just for now.
         }
-        //System.out.println("The regex: " + regex);
         return "hi";
     }
 
     // rips state from 2d array data table by getting rid of the 0 row and column
-    public String[][] ripState(String[][] stateTable){
+    public void ripState(String[][] stateTable){
         int stateTableSize = this.getStates().size()+2;
         int newTableSize = this.getStates().size() + 2;
         System.out.println(stateTableSize);
@@ -363,15 +359,15 @@ public class dfa {
             }
             p++;
         }
-
+        newTableSize--;
         this.stateTable = new String[newTableSize][newTableSize];
         for(int i=0; i<newTableSize; i++){
             for(int j=0; j<newTableSize; j++){
                 this.stateTable[i][j] = newTable[i][j];
             }
         }
-
         this.states.remove(0);
+
         /**
         for(int i=1; i<stateTableSize; i++) {
             for (int j = 1; j < stateTableSize; j++) {
@@ -422,8 +418,8 @@ public class dfa {
                         //System.out.println(newTable[i][j]);
 
 
-        //TODO: fix this return statement
-        return newTable;
+        //TODO: fix this return statement; stfu jordan
+        //return newTable;
     }
 
     /*Getters and Setters*/

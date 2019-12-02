@@ -23,7 +23,7 @@ public class main {
     public static void main(String args[]) throws FileNotFoundException {
         System.out.println("Hello World");
         File myFile;
-        myFile = new File("/Users/jordanho/Documents/cs357_coding_project/src/dfa.txt");
+        myFile = new File("C:\\Users\\go4ma\\IdeaProjects\\cs357_coding_project\\src\\dfa.txt");
         dfa myDFA = new dfa(myFile);
         myDFA.errorChecking();
         /*For debugging purposes
@@ -65,6 +65,7 @@ public class main {
         myDFA.processStateTable();
         String nun = myDFA.transformDfaToRegex();
         int a = 0;
+        /**
         System.out.println(myDFA.getStateTable()[0][0]);
         System.out.println(myDFA.getStateTable()[0][1]);
         System.out.println(myDFA.getStateTable()[0][2]);
@@ -84,6 +85,7 @@ public class main {
         System.out.println(myDFA.getStateTable()[4][6]);
         System.out.println(myDFA.getStateTable()[5][0]);
         System.out.println(myDFA.getStateTable()[5][1]);
+         **/
 
         System.out.println("!!!!!!!!!!!!");
         for(int i = 0; i<myDFA.getStates().size()+2; i++){
@@ -93,7 +95,7 @@ public class main {
         }
         String[][] tempTable = new String[7][7];
         //tempTable = myDFA.ripState(myDFA.getStateTable());
-       String regex = myDFA.transformDfaToRegex();
+       //String regex = myDFA.transformDfaToRegex();
         System.out.println("\n\n\n");
         for(int i = 0; i<myDFA.getStates().size()+2; i++){
             for(int j = 0; j<myDFA.getStates().size()+2; j++){
