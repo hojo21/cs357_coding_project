@@ -87,13 +87,13 @@ public class main {
         System.out.println(myDFA.getStateTable()[5][1]);
          **/
 
-        System.out.println("!!!!!!!!!!!!");
-        for(int i = 0; i<myDFA.getStates().size()+2; i++){
-            for(int j = 0; j<myDFA.getStates().size()+2; j++){
+        //System.out.println("!!!!!!!!!!!!");
+        //for(int i = 0; i<myDFA.getStates().size()+2; i++){
+          //  for(int j = 0; j<myDFA.getStates().size()+2; j++){
                 //System.out.println(myDFA.getStateTable()[i][j]);
-            }
-        }
-        String[][] tempTable = new String[7][7];
+            //}
+        //}
+        //String[][] tempTable = new String[7][7];
         //tempTable = myDFA.ripState(myDFA.getStateTable());
        //String regex = myDFA.transformDfaToRegex();
         System.out.println("\n\n\n");
@@ -102,10 +102,10 @@ public class main {
                 System.out.println(myDFA.getStateTable()[i][j]);
             }
         }
-        for(int i=0; i<myDFA.getStates().size()+2;i++){
-
-        }
-
+        nun = myDFA.cleanRegex(nun);
+        System.out.println("Regular Expression: "+ nun);
+        //now truncate everythiing after e.
+        /**
         System.out.println("`~~~~~```~~~~~~~~~`");
        System.out.println(myDFA.getStateTable()[0][0]);
        System.out.println(myDFA.getStateTable()[0][1]);
@@ -116,6 +116,6 @@ public class main {
         System.out.println(myDFA.getStateTable()[3][3]);
         System.out.println(myDFA.getStateTable()[3][5]);
         System.out.println(myDFA.getStateTable()[4][0]);
-
+        **/
     }
 }
