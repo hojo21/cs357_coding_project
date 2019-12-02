@@ -80,11 +80,11 @@ public class main {
         System.out.println(myDFA.getStateTable()[5][1]);
         for(int i = 0; i<myDFA.getStates().size()+2; i++){
             for(int j = 0; j<myDFA.getStates().size()+2; j++){
-                System.out.println(myDFA.getStateTable()[i][j]);
+                //System.out.println(myDFA.getStateTable()[i][j]);
             }
         }
-        //String[][] tempTable = new String[7][7];
-        //tempTable = myDFA.ripState(myDFA.getStateTable());
-       //String regex = myDFA.transformDfaToRegex();
+        String[][] tempTable = new String[7][7];
+        tempTable = myDFA.ripState(myDFA.getStateTable());
+       String regex = myDFA.transformDfaToRegex();
     }
 }
