@@ -92,7 +92,7 @@ public class main {
             }
         }
         String[][] tempTable = new String[7][7];
-        //tempTable = myDFA.ripState(myDFA.getStateTable());
+        tempTable = myDFA.ripState(myDFA.getStateTable());
        String regex = myDFA.transformDfaToRegex();
         System.out.println("\n\n\n");
         for(int i = 0; i<myDFA.getStates().size()+2; i++){
