@@ -18,15 +18,11 @@ public class dfa {
     private ArrayList<String> acceptStates;
     private ArrayList<String> storeDeltaFromFile;
     private String[][] stateTable;
-    boolean statesPresent = false;
-    boolean sigmaPresent = false;
-    boolean deltaPresent = false;
-    boolean startPresent = false;
-    boolean fpresent =false;
-
-    //Default constructor
-    public dfa(){
-    }
+    private boolean statesPresent = false;
+    private boolean sigmaPresent = false;
+    private boolean deltaPresent = false;
+    private boolean startPresent = false;
+    private boolean fPresent =false;
 
     //file constructor
     public dfa(File dfa) throws FileNotFoundException {
@@ -77,7 +73,7 @@ public class dfa {
                 }
             }
             else if(line.contentEquals("F:")){
-                fpresent = true;
+                fPresent = true;
                 //System.out.print("Accept States are\n");
                 while(sc.hasNextLine()){
                     String acceptState = sc.nextLine();
@@ -88,7 +84,7 @@ public class dfa {
         }
     }
 
-    void errorChecking(){
+    public void errorChecking(){
         if(!statesPresent){
             System.out.println("Error: File input not in proper format. Must include 'Q:'" +
                     "before naming states. Exiting.");
@@ -109,7 +105,7 @@ public class dfa {
                     "before identifying start state. Exiting");
             System.exit(1);
         }
-        else if(!fpresent){
+        else if(!fPresent){
             System.out.println("Error: File input not in proper format. Must include 'F: ' " +
                     "before defining accepting states. Exiting");
             System.exit(1);
@@ -141,7 +137,7 @@ public class dfa {
     //processDelta
     //We know if its an odd row or even row because of the format we are using
     //in the text file.
-    void processDelta(){
+    public void processDelta(){
         int state = 0;
         int letter;
         delta = new String[this.getStates().size()][this.getAlphabet().size()];
@@ -162,7 +158,7 @@ public class dfa {
     }
 
     //this will be for the transformation algorithm.
-    void processStateTable(){
+    public void processStateTable(){
         int numStates = this.getStates().size();
         int alphabetSize = this.getAlphabet().size();
         stateTable = new String[numStates+2][numStates+2];
