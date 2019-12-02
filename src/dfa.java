@@ -239,7 +239,7 @@ public class dfa {
                 //if()
             //}
             this.states.remove(0);
-            this.stateTable = this.ripState(this.stateTable);
+            //this.stateTable = this.ripState(this.stateTable);
             regexLeaving = "";
             regexArriving = "";
             stateTableSize -= 1; //for the for loops up above.
@@ -252,64 +252,87 @@ public class dfa {
 
     // rips state from 2d array data table by getting rid of the 0 row and column
     public String[][] ripState(String[][] stateTable){
-        int stateTableSize = this.getStates().size() - 1;
+        int stateTableSize = this.getStates().size()+2;
+        int newTableSize = this.getStates().size() + 1;
         String[][] newTable = new String[stateTableSize][stateTableSize];
         String stateString = new String("");
         String newString = new String("");
         String unionString = new String("");
 
         // copies data from stateTable into newTable
-        /**
+
         for(int i=0; i<stateTableSize; i++){
             for(int j=0; j<stateTableSize; j++){
-                if(stateTable[i][j] != null){
-                    newTable[i][j] = stateTable[i][j];
-                }
+                newTable[i][j] = stateTable[i][j];
                 System.out.println(newTable[i][j]);
             }
         }
-         **/
-
-        for(int i=0; i<stateTableSize; i++){
-            for(int j=0; j<stateTableSize; j++){
-                // copying information from the larger state table into the small starting from the first row and column
-                // only copies data into the table if the opening is null, meaning it does not have to union
-                /**
-                if(stateTable[i][j] != null){
-                    newTable[i][j] = stateTable[i][j];
-                }**/
-
-                // copies data from stateTable row 1 into newTable row 1 if there is no necessary union
-                if(stateTable[0][j] != null && stateTable[0][j+1] == null){
-                    newTable[0][j] = stateTable[0][j];
+        System.out.println("----------------------");
+        System.out.println("state size: "+ stateTableSize);
+        int p = 0;
+        for(int x=0; x<stateTableSize; x++){
+            if(x == 0){
+                continue;
+            }
+            int q = 0;
+            for(int y=0; y<stateTableSize; y++){
+                if(y == 0){
+                    continue;
                 }
-                // unions row 0 with row 1
-                if(stateTable[0][j] != null && stateTable[1][j+1] != null){
-                    stateString = stateTable[0][j];
-                    newString = stateTable[1][j+1];
-                    unionString = stateString + "U" + newString;
-                    //System.out.println(stateString);
-                    //System.out.println(newString);
-                    //System.out.println(unionString);
-                    newTable[0][j] = newString;
-                }
-                // creates star loop if transition goes back to the same state
-
-                // copies data from the first column into the first column of the new table and unions if necessary
-                if(i >= 1 && j == 0){
-                    if(stateTable[i][0] != null && stateTable[i+1][0] == null){
-                        newTable[i][0] = stateTable[i][0];
-                    }
-                    if(stateTable[i][0] != null && stateTable[i+1][0] != null){
-                        stateString = stateTable[i][0];
-                        newString = stateTable[i+1][0];
-                        unionString = stateString + "U" + newString;
-                        newTable[i][0] = unionString;
-                    }
-                }
-                //System.out.println(newTable[i][j]);
+                newTable[p][q] = stateTable[x][y];
+                System.out.println(newTable[p][q]);
+                q++;
+            }
+            p++;
+        }
+        /**
+        for(int i=1; i<stateTableSize; i++) {
+            for (int j = 1; j < stateTableSize; j++) {
+                newTable[i - 1][j - 1] = stateTable[i][j];
+                System.out.println(newTable[i - 1][j - 1]);
             }
         }
+         **/
+                        // copying information from the larger state table into the small starting from the first row and column
+                        // only copies data into the table if the opening is null, meaning it does not have to union
+                        /**
+                        if (stateTable[i][j] != null && i != 0 && j !=0) {
+                            newTable[x][y] = stateTable[i][j];
+                            System.out.println(newTable[x][y]);
+                        }
+                        **/
+                        // copies data from stateTable row 1 into newTable row 1 if there is no necessary union
+                        //if(stateTable[i+1][j+1] != null ){
+
+
+                        //}
+                        /**
+                         // unions row 0 with row 1
+                         if(stateTable[0][j] != null && stateTable[1][j+1] != null){
+                         stateString = stateTable[0][j];
+                         newString = stateTable[1][j+1];
+                         unionString = stateString + "U" + newString;
+                         //System.out.println(stateString);
+                         //System.out.println(newString);
+                         //System.out.println(unionString);
+                         newTable[0][j] = newString;
+                         }
+                         // creates star loop if transition goes back to the same state
+
+                         // copies data from the first column into the first column of the new table and unions if necessary
+                         if(i >= 1 && j == 0){
+                         if(stateTable[i][0] != null && stateTable[i+1][0] == null){
+                         newTable[i][0] = stateTable[i][0];
+                         }
+                         if(stateTable[i][0] != null && stateTable[i+1][0] != null){
+                         stateString = stateTable[i][0];
+                         newString = stateTable[i+1][0];
+                         unionString = stateString + "U" + newString;
+                         newTable[i][0] = unionString;
+                         }
+                         }
+                         **/
+                        //System.out.println(newTable[i][j]);
 
 
         //TODO: fix this return statement

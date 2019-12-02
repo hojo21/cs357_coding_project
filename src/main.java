@@ -22,7 +22,7 @@ public class main {
 
     public static void main(String args[]) throws FileNotFoundException {
         System.out.println("Hello World");
-        File myFile = new File("C:\\Users\\go4ma\\IdeaProjects\\cs357_coding_project\\src\\dfa.txt");
+        File myFile = new File("/Users/jordanho/Documents/cs357_coding_project/src/dfa.txt");
         dfa myDFA = new dfa(myFile);
 
         /*For debugging purposes
@@ -65,11 +65,11 @@ public class main {
         String nun = myDFA.transformDfaToRegex();
         for(int i = 0; i<myDFA.getStates().size()+2; i++){
             for(int j = 0; j<myDFA.getStates().size()+2; j++){
-                System.out.println(myDFA.getStateTable()[i][j]);
+                //System.out.println(myDFA.getStateTable()[i][j]);
             }
         }
-        //String[][] tempTable = new String[7][7];
-        //tempTable = myDFA.ripState(myDFA.getStateTable());
-       //String regex = myDFA.transformDfaToRegex();
+        String[][] tempTable = new String[7][7];
+        tempTable = myDFA.ripState(myDFA.getStateTable());
+       String regex = myDFA.transformDfaToRegex();
     }
 }
