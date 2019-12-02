@@ -1,4 +1,5 @@
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -231,8 +232,8 @@ public class dfa {
             //for(String state : this.states){
                 //if()
             //}
-            this.states.remove(0);
-            //this.stateTable = this.ripState(this.stateTable);
+            //this.states.remove(0);
+            this.stateTable = this.ripState(this.stateTable);
             regexLeaving = "";
             regexArriving = "";
             stateTableSize -= 1; //for the for loops up above.
@@ -246,44 +247,73 @@ public class dfa {
     // rips state from 2d array data table by getting rid of the 0 row and column
     public String[][] ripState(String[][] stateTable){
         int stateTableSize = this.getStates().size()+2;
-        int newTableSize = this.getStates().size() + 1;
+        int newTableSize = this.getStates().size() + 2;
+        System.out.println(stateTableSize);
         String[][] newTable = new String[stateTableSize][stateTableSize];
+        String[][] tempTable = new String[newTableSize][newTableSize];
         String stateString = new String("");
         String newString = new String("");
         String unionString = new String("");
 
         // copies data from stateTable into newTable
 
+
         for(int i=0; i<stateTableSize; i++){
             for(int j=0; j<stateTableSize; j++){
-                if (stateTable[i][j] != null) {
+                //if (stateTable[i][j] != null) {
                     newTable[i][j] = stateTable[i][j];
                     System.out.println(newTable[i][j]);
-                }
+                //}
 
             }
         }
         System.out.println("----------------------");
         System.out.println("state size: "+ stateTableSize);
+
+        /*
+        for(int a=1; a<stateTableSize;a++){
+            for(int b=1; b<stateTableSize;b++){
+                for(int c=0; c<newTableSize; c++){
+                    for(int d=0; d<newTableSize; d++){
+                        if (stateTable[a][b] != null) {
+                            tempTable[c][d] = stateTable[a][b];
+                            System.out.println(tempTable[c][d]);
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println("////////////////");**/
+
         int p = 0;
-        for(int x=0; x<stateTableSize; x++){
+        for(int x=0; x<newTableSize; x++){
             if(x == 0){
                 continue;
             }
             int q = 0;
-            for(int y=0; y<stateTableSize; y++){
+            for(int y=0; y<newTableSize; y++){
                 if(y == 0){
                     continue;
                 }
-                if (stateTable[x][y] != null) {
-                    newTable[x][y] = stateTable[x][y];
+                //if (stateTable[x][y] != null) {
                     newTable[p][q] = stateTable[x][y];
+                    //newTable[p][q] = stateTable[x][y];
+
                     System.out.println(newTable[p][q]);
                     q++;
-                }
+                //}
             }
             p++;
         }
+
+        this.stateTable = new String[newTableSize][newTableSize];
+        for(int i=0; i<newTableSize; i++){
+            for(int j=0; j<newTableSize; j++){
+                this.stateTable[i][j] = newTable[i][j];
+            }
+        }
+
+        this.states.remove(0);
         /**
         for(int i=1; i<stateTableSize; i++) {
             for (int j = 1; j < stateTableSize; j++) {
@@ -335,7 +365,7 @@ public class dfa {
 
 
         //TODO: fix this return statement
-        return new String[0][];
+        return newTable;
     }
 
     /*Getters and Setters*/
