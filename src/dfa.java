@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * @author Gabe Marcial
  * @author Jordan Ho
- * dfa class
+ * dfa class file
  **/
 public class dfa {
     //Initialize start variables.

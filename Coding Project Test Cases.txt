@@ -1,0 +1,196 @@
+Coding Project Test Cases
+
+Test Case 1:
+Input:
+Q:
+q0
+q1
+q2
+q3
+q4
+end
+Sigma:
+a
+b
+end
+Delta:
+q0, a, q0
+q0, b, q1
+q1, a, q2
+q1, b, q1
+q2, a, q0
+q2, b, q3
+q3, a, q4
+q3, b, q1
+q4, a, q4
+q4, b, q4
+end
+Start:
+q0
+end
+F:
+q4
+Output:
+Regular Expression: (a)*(b)(b)*(a)(b)(a)Σ*
+
+Process finished with exit code 0
+
+Test Case 2:
+Input:
+Q:
+q0
+q1
+q2
+q3
+q4
+q5
+end
+Sigma:
+a
+b
+end
+Delta:
+q0, a, q1
+q0, b, q0
+q1, a, q2
+q1, b, q1
+q2, a, q2
+q2, b, q3
+q3, a, q3
+q3, b, q4
+q4, a, q5
+q4, b, q4
+q5, a, q5
+q5, b, q5
+end
+Start:
+q0
+end
+F:
+q5
+Output:
+Regular Expression: (b)*(a)(b)*(a)(a)*(b)(a)*(b)(b)*(a)*
+
+Process finished with exit code 0
+
+Test Case 3:
+Input:
+Q:
+q0
+q1
+q2
+q3
+q4
+q5
+end
+Sigma:
+0
+1
+end
+Delta:
+q0, 0, q1
+q0, 1, q0
+q1, 0, q2
+q1, 1, q1
+q2, 0, q2
+q2, 1, q3
+q3, 0, q4
+q3, 1, q3
+q4, 0, q5
+q4, 1, q4
+q5, 0, q5
+q5, 1, q5
+end
+Start:
+q0
+end
+F:
+q5
+Output:
+Regular Expression: (1)*(0)(1)*(0)(0)*(1)(1)*(0)(1)*(0)*
+
+Process finished with exit code 0
+
+Test Case 4:
+Input:
+Q:
+a0
+a43
+d421
+b52
+m4
+q0
+a2
+fewa2
+end
+Sigma:
+a
+ba-32
+f3w vf
+fe
+end
+Delta:
+q0, 
+a, q1
+q0, b, q0
+q1,
+ a, q2
+q1, b, 
+q1
+q2, a, q2
+q2,
+ b, q3
+q3, a, q3
+q3, b, q4
+q4, a, q5
+
+q4, b, q4
+q5, a,
+ q5
+q5,
+ b, q5
+end
+Start:
+q3212
+end
+F:
+adsfesdfb
+Output:
+Error: Invalid file input. Exiting
+
+Process finished with exit code 1
+
+Test Case 5:
+Input:
+Q:
+q0
+q1
+q2
+q3
+q4
+end
+Sigma:
+0
+1
+end
+Delta:
+q0, 0, q2
+q0, 1, q1
+q1, 0, q2
+q1, 1, q0
+q2, 0, q2
+q2, 1, q3
+q3, 0, q4
+q3, 1, q1
+q4, 0, q4
+q4, 1, q3
+end
+Start:
+q0
+end
+F:
+q4
+Output:
+Regular Expression: (1)(0)(0)(1)Σ*
+
+Process finished with exit code 0
