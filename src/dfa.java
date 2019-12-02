@@ -41,43 +41,45 @@ public class dfa {
         Scanner sc = new Scanner(dfa);
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
+            System.out.println(line);
             if (line.contentEquals("Q:")) {
                 statesPresent = true;
                 //System.out.print("Set of states.\n");
                 while (sc.hasNextLine()) {
                     String state = sc.nextLine();
+                    System.out.println(state);
                     if (state.contentEquals("end")) break;
                     else states.add(state);
                 }
             } else if (line.contentEquals("Sigma:")) {
                 sigmaPresent = true;
-                //System.out.print("Sigma\n");
                 while (sc.hasNextLine()) {
                     String letter = sc.nextLine();
+                    System.out.println(letter);
                     if (letter.contentEquals("end")) break;
                     else alphabet.add(letter);
                 }
             } else if (line.contentEquals("Delta:")) {
                 deltaPresent = true;
-                //System.out.print("Delta\n");
                 while (sc.hasNextLine()) {
                     String transition = sc.nextLine();
+                    System.out.println(transition);
                     if (transition.contentEquals("end")) break;
                     else storeDeltaFromFile.add(transition);
                 }
             } else if (line.contentEquals("Start:")) {
                 startPresent = true;
-                //System.out.print("start state is \n");
                 while (sc.hasNextLine()) {
                     String startState = sc.nextLine();
+                    System.out.println(startState);
                     if (startState.contentEquals("end")) break;
                     else start = startState;
                 }
             } else if (line.contentEquals("F:")) {
                 fPresent = true;
-                //System.out.print("Accept States are\n");
                 while (sc.hasNextLine()) {
                     String acceptState = sc.nextLine();
+                    System.out.println(acceptState);
                     if (acceptState.contentEquals("end")) break;
                     else acceptStates.add(acceptState);
                 }
@@ -153,7 +155,6 @@ public class dfa {
                 letter = 1;
                 delta[state][letter] = transition.substring(transition.lastIndexOf("b,") + 3);
                 state += 1;  //increment the state
-                //we only increment state here because it changes every other line.
             }
         }
     }
@@ -163,7 +164,6 @@ public class dfa {
      */
     public void processStateTable() {
         int numStates = this.getStates().size();
-        int alphabetSize = this.getAlphabet().size();
         stateTable = new String[numStates + 2][numStates + 2];
 
         for (String transition : this.getStoreDeltaFromFile()) {
@@ -180,8 +180,6 @@ public class dfa {
                 stateTable[stateF][stateT] += "U(" + letter + ")";
             }
             //check if start state
-            //no need for for loop since there is only one accept state, but must still
-            //do the normal table filling. THus, the nested if-else.
             else if (line[2].contentEquals(this.getStart())) {
                 stateTable[numStates][stateT] = "e";
                 if (stateF == stateT && stateTable[stateF][stateT] != null) {
@@ -194,23 +192,12 @@ public class dfa {
             }
 
             //check if accept state.
-            //need to use for loop since it can be a collection.
             for (String accept : this.getAcceptStates()) {
                 if (line[0].contentEquals(accept)) {
                     stateTable[stateF][numStates + 1] = "e";
                 }
             }
-            //System.out.println(stateFrom + " " + stateF + " " +  stateTo + " " + stateT);
         }
-
-        //for debugging.
-        /*
-        for(int i = 0; i<numStates+2; i++){
-            for(int j = 0; j<numStates+2; j++){
-                System.out.println(" " + stateTable[i][j]);
-            }
-        }
-         */
     }
 
     /**
@@ -221,10 +208,7 @@ public class dfa {
         //create a state table.
         processStateTable();
         int stateTableSize = this.getStates().size() + 2;
-        ArrayList<String> from = new ArrayList<String>();
-        int stateToRip = 0;
         int statesLeft = this.getStates().size();
-        int numStates = this.getStates().size();
         String regexLeaving = "";
         String regexArriving = "";
         ArrayList<Integer> statesTo = new ArrayList<Integer>();
@@ -233,9 +217,7 @@ public class dfa {
         while (statesLeft != 0) {
             for (int i = 0; i < stateTableSize; i++) {
                 for (int j = 0; j < stateTableSize; j++) {
-                    //checking first box
-                    //since i and j are equal it means that a state
-                    //goes to themselves thus we must concatenate the content*
+                    //checking first index.
                     if (i == 0 && j == 0) {
                         if (this.getStateTable()[i][j] != null) {
                             regexLeaving = regexLeaving + this.getStateTable()[i][j] + "*";
@@ -270,32 +252,23 @@ public class dfa {
             }
 
             for (int stateTo : statesTo) {
-                System.out.println(stateTo);
                 if (this.stateTable[stateTableSize - 2][stateTo] != null && (stateTableSize - 2) != stateTo) {
-                    this.stateTable[stateTableSize - 2][stateTo] = this.stateTable[stateTableSize - 2][stateTo] + regexLeaving;
+                    this.stateTable[stateTableSize - 2][stateTo] = this.stateTable[stateTableSize - 2][stateTo] +
+                            regexLeaving;
                 } else {
                     this.stateTable[stateTableSize - 2][stateTo] = regexLeaving;
                 }
             }
             for (int stateFrom : statesFrom) {
-                System.out.println(stateFrom);
                 if ((this.stateTable[stateFrom][stateTableSize - 2] != null) && (stateTableSize - 2) != stateFrom) {
-                    this.stateTable[stateFrom][stateTableSize - 2] = this.stateTable[stateFrom][stateTableSize - 2] + regexArriving;
+                    this.stateTable[stateFrom][stateTableSize - 2] = this.stateTable[stateFrom][stateTableSize - 2] +
+                            regexArriving;
                 } else {
                     this.stateTable[stateFrom][stateTableSize - 2] = regexArriving;
                 }
             }
-            //printing the table each time.
-            System.out.println("===========================");
-            for (int i = 0; i < this.states.size() + 2; i++) {
-                for (int j = 0; j < this.states.size() + 2; j++) {
-                    System.out.println(this.stateTable[i][j]);
-                }
-            }
 
             this.ripState(this.stateTable);
-            System.out.print("Regex leaving: " + regexLeaving);
-            //regexLeaving = "";
             regexArriving = "";
             stateTableSize -= 1; //for the for loops up above.
             statesLeft -= 1;
@@ -389,10 +362,6 @@ public class dfa {
 
     public ArrayList<String> getStoreDeltaFromFile() {
         return this.storeDeltaFromFile;
-    }
-
-    public String[][] getDelta() {
-        return this.delta;
     }
 
     public String[][] getStateTable() {
