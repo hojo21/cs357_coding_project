@@ -127,7 +127,7 @@ public class dfa {
         else{
             for(String character : this.alphabet){
                 if(character.length() > 1){
-                    System.out.println("Error: Invalid alphabet. Exiting");
+                    System.out.println("Error: Invalid file input. Exiting");
                     System.exit(1);
                 }
             }

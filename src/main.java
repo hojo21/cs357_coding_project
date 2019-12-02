@@ -9,8 +9,8 @@ import java.io.FileNotFoundException;
 * Converting DFA to Regular Expression.
  **/
 
-//TODO: "/Users/jordanho/Documents/cs357_coding_project/src/dfa.txt"
-    //C:\Users\go4ma\IdeaProjects\cs357_coding_project\src\dfa.txt
+//"/Users/jordanho/Documents/cs357_coding_project/src/dfa.txt"
+// C:\Users\go4ma\IdeaProjects\cs357_coding_project\src\dfa.txt
 
 public class main {
     /**
@@ -20,7 +20,7 @@ public class main {
      */
     public static void main(String args[]) throws FileNotFoundException {
         File myFile;
-        myFile = new File("out/production/coding_project/dfa.txt");
+        myFile = new File("out/production/coding_project/dfa4.txt");
         dfa myDFA = new dfa(myFile);
         System.out.println("\n\n");
         myDFA.errorChecking();
