@@ -18,6 +18,11 @@ public class dfa {
     private ArrayList<String> acceptStates;
     private ArrayList<String> storeDeltaFromFile;
     private String[][] stateTable;
+    boolean statesPresent = false;
+    boolean sigmaPresent = false;
+    boolean deltaPresent = false;
+    boolean startPresent = false;
+    boolean fpresent =false;
 
     //Default constructor
     public dfa(){
@@ -36,6 +41,7 @@ public class dfa {
         while(sc.hasNextLine()){
             String line = sc.nextLine();
             if(line.contentEquals("Q:")){
+                statesPresent = true;
                 //System.out.print("Set of states.\n");
                 while(sc.hasNextLine()){
                     String state = sc.nextLine();
@@ -44,6 +50,7 @@ public class dfa {
                 }
             }
             else if(line.contentEquals("Sigma:")){
+                sigmaPresent = true;
                 //System.out.print("Sigma\n");
                 while(sc.hasNextLine()){
                     String letter = sc.nextLine();
@@ -52,6 +59,7 @@ public class dfa {
                 }
             }
             else if(line.contentEquals("Delta:")){
+                deltaPresent = true;
                 //System.out.print("Delta\n");
                 while(sc.hasNextLine()){
                     String transition = sc.nextLine();
@@ -60,6 +68,7 @@ public class dfa {
                 }
             }
             else if(line.contentEquals("Start:")){
+                startPresent = true;
                 //System.out.print("start state is \n");
                 while(sc.hasNextLine()){
                     String startState = sc.nextLine();
@@ -68,6 +77,7 @@ public class dfa {
                 }
             }
             else if(line.contentEquals("F:")){
+                fpresent = true;
                 //System.out.print("Accept States are\n");
                 while(sc.hasNextLine()){
                     String acceptState = sc.nextLine();
@@ -77,6 +87,55 @@ public class dfa {
             }
         }
     }
+
+    void errorChecking(){
+        if(!statesPresent){
+            System.out.println("Error: File input not in proper format. Must include 'Q:'" +
+                    "before naming states. Exiting.");
+            System.exit(1);
+        }
+        else if(!sigmaPresent){
+            System.out.println("Error: File input not in proper format. Must include 'Sigma: ' " +
+                    "before naming alphabet. Exiting");
+            System.exit(1);
+        }
+        else if(!deltaPresent){
+            System.out.println("Error: File input not in proper format. Must include 'Delta: ' " +
+                    "before defining transition table. Exiting");
+            System.exit(1);
+        }
+        else if(!startPresent){
+            System.out.println("Error: File input not in proper format. Must include 'Start: ' " +
+                    "before identifying start state. Exiting");
+            System.exit(1);
+        }
+        else if(!fpresent){
+            System.out.println("Error: File input not in proper format. Must include 'F: ' " +
+                    "before defining accepting states. Exiting");
+            System.exit(1);
+        }
+        else if(this.states.size() == 0){
+            System.out.println("Error: No states defined. Exiting.");
+            System.exit(1);
+        }
+        else if(this.alphabet.size() == 0){
+            System.out.println("Error: No alphabet defined. Exiting");
+            System.exit(1);
+        }
+        else if(this.acceptStates.size() == 0){
+            System.out.println("No accept states. \n No regular expression.");
+            System.exit(1);
+        }
+        else if(this.start == null){
+            System.out.println("Error: No start state defined. Exiting");
+            System.exit(1);
+        }
+        else{
+            //File looks good.
+            System.out.println("File looks good.");
+        }
+    }
+
 
     /*Function definitions*/
     //processDelta
@@ -231,7 +290,7 @@ public class dfa {
             //for(String state : this.states){
                 //if()
             //}
-            this.states.remove(0);
+            //this.states.remove(0);
             //this.stateTable = this.ripState(this.stateTable);
             regexLeaving = "";
             regexArriving = "";
